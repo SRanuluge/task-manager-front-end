@@ -9,9 +9,9 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const isLogged = true
+const isLogged = true;
 
-export function Navbar({  routes }) {
+export function Navbar({ routes }) {
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -31,20 +31,18 @@ export function Navbar({  routes }) {
           color="inherit"
           className="capitalize"
         >
-          {isLogged && (path === '/home' || path === '/profile') &&   (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-              onClick={() => setOpenNav(false)}
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </Link>
-          ) }
+          <Link
+            to={path}
+            target={target}
+            className="flex items-center gap-1 p-1 font-normal"
+            onClick={() => setOpenNav(false)}
+          >
+            {icon &&
+              React.createElement(icon, {
+                className: "w-[18px] h-[18px] opacity-75 mr-1",
+              })}
+            {name}
+          </Link>
         </Typography>
       ))}
     </ul>
@@ -53,13 +51,13 @@ export function Navbar({  routes }) {
   return (
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
-        <Link to={isLogged ? "/" : '/sign-in'}>
-          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
+        <Link to={isLogged ? "/" : "/sign-in"}>
+          <Typography className="ml-2 mr-4 cursor-pointer py-1.5 font-bold">
             {"sranuluge.dev"}
           </Typography>
         </Link>
         <div className="hidden lg:block">{navList}</div>
-        
+
         <IconButton
           variant="text"
           size="sm"
@@ -75,7 +73,7 @@ export function Navbar({  routes }) {
         </IconButton>
       </div>
       <MobileNav
-        className="rounded-xl bg-white px-4 pt-2 pb-4 text-blue-gray-900"
+        className="rounded-xl bg-white px-4 pb-4 pt-2 text-blue-gray-900"
         open={openNav}
       >
         <div className="container mx-auto">

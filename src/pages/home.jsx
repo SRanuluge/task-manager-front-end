@@ -1,17 +1,24 @@
 import React from "react";
-import {
-  Typography,
-  Button,
-  Input,
-} from "@material-tailwind/react";
-import {  Footer } from "@/widgets/layout";
-import { FeatureCard, } from "@/widgets/cards";
+import { Typography, Button, Input } from "@material-tailwind/react";
+import { Footer } from "@/widgets/layout";
+import { FeatureCard } from "@/widgets/cards";
 import { featuresData } from "@/data";
+import { userSignInAPI } from "@/services/apiMethods";
+import { useLoaderData } from "react-router-dom";
+
+// export const userLogin = async () => {
+//   await userSignInAPI({
+//     email: "fovomi9697@klanze.com",
+//     password: "red12345!",
+//   });
+// };
 
 export function Home() {
+  // const data = useLoaderData();
+  // console.log(data);
   return (
     <>
-      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
+      <div className="relative flex h-screen content-center items-center justify-center pb-32 pt-16">
         <div className="absolute top-0 h-full w-full bg-[url('../../public/img/background-2.jpg')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto">
@@ -25,13 +32,23 @@ export function Home() {
                 Manage Your Tasks
               </Typography>
               <form className="mx-auto mt-12 max-w-3xl text-center">
-            <div className="mb-8 flex gap-8">
-              <Input color="green" variant="standard" size="lg" label="Task Name" />
-            </div>
-            <Button color="green" variant="gradient" size="lg" className="mt-8">
-              Add Task
-            </Button>
-          </form>
+                <div className="mb-8 flex gap-8">
+                  <Input
+                    color="green"
+                    variant="standard"
+                    size="lg"
+                    label="Task Name"
+                  />
+                </div>
+                <Button
+                  color="green"
+                  variant="gradient"
+                  size="lg"
+                  className="mt-8"
+                >
+                  Add Task
+                </Button>
+              </form>
             </div>
           </div>
         </div>

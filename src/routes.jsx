@@ -4,21 +4,10 @@ import {
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 
 export const routes = [
-  {
-    icon: HomeIcon,
-    name: "home",
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    icon: UserCircleIcon,
-    name: "profile",
-    path: "/profile",
-    element: <Profile />,
-  },
   {
     icon: ArrowRightOnRectangleIcon,
     name: "Sign In",
@@ -33,4 +22,23 @@ export const routes = [
   },
 ];
 
-export default routes;
+export const protectedRoutes = [
+  {
+    icon: HomeIcon,
+    name: "home",
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    icon: UserCircleIcon,
+    name: "profile",
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    icon: ArrowLeftOnRectangleIcon,
+    name: "Sign Out",
+    path: "/sign-out",
+    element: <SignIn />,
+  },
+];
