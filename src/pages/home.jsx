@@ -2,20 +2,26 @@ import React from "react";
 import { Typography, Button, Input } from "@material-tailwind/react";
 import { Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
-import { featuresData } from "@/data";
-import { userSignInAPI } from "@/services/apiMethods";
-import { useLoaderData } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { createTask, getTaskList } from "@/redux/tasks/taskThunk";
+import { useEffect } from "react";
 
-// export const userLogin = async () => {
-//   await userSignInAPI({
-//     email: "fovomi9697@klanze.com",
-//     password: "red12345!",
-//   });
-// };
+const params = ["createdAt", "desc"];
 
 export function Home() {
-  // const data = useLoaderData();
-  // console.log(data);
+  const { tasks } = useSelector((state) => state.task);
+  const dispatch = useDispatch();
+  const [task, setTask] = useState("");
+
+  const handleCreateTask = () => {
+    dispatch(createTask({ description: task, completed: false }));
+  };
+
+  useEffect(() => {
+    !tasks && dispatch(getTaskList(params.join(":")));
+  }, []);
+
   return (
     <>
       <div className="relative flex h-screen content-center items-center justify-center pb-32 pt-16">
@@ -31,13 +37,15 @@ export function Home() {
               >
                 Manage Your Tasks
               </Typography>
-              <form className="mx-auto mt-12 max-w-3xl text-center">
+              <div className="mx-auto mt-12 max-w-3xl text-center">
                 <div className="mb-8 flex gap-8">
                   <Input
                     color="green"
                     variant="standard"
                     size="lg"
                     label="Task Name"
+                    name="task"
+                    onChange={(e) => setTask(e.target.value)}
                   />
                 </div>
                 <Button
@@ -45,10 +53,11 @@ export function Home() {
                   variant="gradient"
                   size="lg"
                   className="mt-8"
+                  onClick={handleCreateTask}
                 >
                   Add Task
                 </Button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -56,17 +65,18 @@ export function Home() {
       <section className="-mt-32 bg-gray-50 px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuresData.map(({ color, title, icon, description }) => (
-              <FeatureCard
-                key={title}
-                color={color}
-                title={title}
-                icon={React.createElement(icon, {
-                  className: "w-5 h-5 text-white",
-                })}
-                description={description}
-              />
-            ))}
+            {tasks &&
+              tasks.map(({ description, completed, createdAt, updatedAt }) => (
+                <FeatureCard
+                  key={createdAt}
+                  color={"red"}
+                  title={description}
+                  // icon={React.createElement(icon, {
+                  //   className: "w-5 h-5 text-white",
+                  // })}
+                  description={description}
+                />
+              ))}
           </div>
         </div>
       </section>

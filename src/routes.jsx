@@ -26,7 +26,7 @@ export const protectedRoutes = [
   {
     icon: HomeIcon,
     name: "home",
-    path: "/home",
+    path: "/",
     element: <Home />,
   },
   {
@@ -39,6 +39,6 @@ export const protectedRoutes = [
     icon: ArrowLeftOnRectangleIcon,
     name: "Sign Out",
     path: "/sign-out",
-    element: <SignIn />,
+    element: null,
   },
 ];

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -10,8 +10,26 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { userSignUp } from "@/redux/users/userThunk";
 
 export function SignUp() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [name, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = () => {
+    dispatch(
+      userSignUp({
+        name,
+        email,
+        password,
+      })
+    );
+  };
   return (
     <>
       <img
@@ -20,7 +38,7 @@ export function SignUp() {
       />
       <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />
       <div className="container mx-auto p-4">
-        <Card className="absolute top-2/4 left-2/4 w-full max-w-[24rem] -translate-y-2/4 -translate-x-2/4">
+        <Card className="absolute left-2/4 top-2/4 w-full max-w-[24rem] -translate-x-2/4 -translate-y-2/4">
           <CardHeader
             variant="gradient"
             color="green"
@@ -31,9 +49,24 @@ export function SignUp() {
             </Typography>
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
-            <Input variant="standard" label="Name" size="lg" />
-            <Input variant="standard" type="email" label="Email" size="lg" />
             <Input
+              variant="standard"
+              name="name"
+              onChange={(e) => setUserName(e.target.value)}
+              label="Name"
+              size="lg"
+            />
+            <Input
+              onChange={(e) => setEmail(e.target.value)}
+              variant="standard"
+              type="email"
+              name="email"
+              label="Email"
+              size="lg"
+            />
+            <Input
+              onChange={(e) => setPassword(e.target.value)}
+              name="password"
               variant="standard"
               type="password"
               label="Password"
@@ -44,7 +77,12 @@ export function SignUp() {
             </div>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" color="green" fullWidth>
+            <Button
+              variant="gradient"
+              onClick={handleSignUp}
+              color="green"
+              fullWidth
+            >
               Sign Up
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">

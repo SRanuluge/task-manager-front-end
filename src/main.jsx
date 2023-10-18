@@ -5,55 +5,51 @@ import {
   RouterProvider,
   Route,
   createBrowserRouter,
-  Navigate,
 } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
 import "../public/css/tailwind.css";
 import ErrorBoundary from "./widgets/ErrorBoundary";
-import Layout from "@/layout";
-import { routes, protectedRoutes } from "@/routes";
 import PrivateRoute from "@/widgets/PrivateRoute";
-import ErrorPage from "@/NotFoundPage";
+import ErrorPage from "@/ErrorPage";
+import NotFoundPage from "@/NotFoundPage";
+import { Provider } from "react-redux";
+import { Home, Profile, SignIn, SignUp } from "./pages";
+import { persist, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import App from "./App";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-      {routes.map(
-        ({ path, element }, key) =>
-          element && (
-            <Route
-              errorElement={<ErrorPage />}
-              key={key}
-              path={path}
-              element={element}
-            />
-          )
-      )}
-      <Route element={<PrivateRoute />}>
-        {protectedRoutes.map(
-          ({ path, element }, key) =>
-            element && (
-              <Route
-                errorElement={<ErrorPage />}
-                key={key}
-                exact
-                path={path}
-                element={element}
-              />
-            )
-        )}
-        <Route path={"*"} element={<Navigate to="/home" />} />
+    <Route element={<App />}>
+      <Route
+        errorElement={<ErrorPage />}
+        path={"/sign-in"}
+        element={<SignIn />}
+      />
+      <Route
+        errorElement={<ErrorPage />}
+        path={"sign-up"}
+        element={<SignUp />}
+      />
+      <Route path={"/"} element={<PrivateRoute />} errorElement={<ErrorPage />}>
+        <Route exact index={true} path={"/"} element={<Home />} />
+        <Route path={"/profile"} element={<Profile />} />
       </Route>
-    </>
+      <Route path={"*"} element={<NotFoundPage />} />
+    </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persist}>
+          <ThemeProvider>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>
 );

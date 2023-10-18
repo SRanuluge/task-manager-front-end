@@ -15,12 +15,12 @@ const API = axios.create({
   },
 });
 
-const setAuthHeader = (token) => {
-  API.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// const setAuthHeader = (token) => {
+//   API.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 const apiBuilder = {
   API,
-  setAuthHeader,
+  // setAuthHeader,
 };
 export default apiBuilder;
