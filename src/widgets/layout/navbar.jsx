@@ -19,16 +19,7 @@ export function Navbar({ routes }) {
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
-    dispatch(userSignOut()).then((res) => {
-      // const statusCode = res?.payload?.status;
-      // const message = res?.payload?.data.message;
-      // if (statusCode === 401) {
-      //   dispatch(clearCredential());
-      //   return Toast(message, "error");
-      // } else {
-      //   statusCode && Toast(message, "error");
-      // }
-    });
+    dispatch(userSignOut());
   };
 
   React.useEffect(() => {
@@ -92,7 +83,7 @@ export function Navbar({ routes }) {
   return (
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
-        <Link to={"/"}>
+        <Link to={"/"} replace>
           <Typography className="ml-2 mr-4 cursor-pointer py-1.5 font-bold">
             {"sranuluge.dev"}
           </Typography>
