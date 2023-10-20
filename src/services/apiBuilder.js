@@ -1,15 +1,13 @@
 import axios from "axios";
 
-// const baseURL = process.env.REACT_PUBLIC_API_BASE_URL;
-const baseURL = "http://localhost:3000/";
-
+const baseURL = process.env.REACT_PUBLIC_API_BASE_URL;
+// const baseURL = "http://3.106.182.235:3000/";
 if (!baseURL) {
   console.warn(`REACT_PUBLIC_API_BASE_URL has not defined!`);
 }
 
 const API = axios.create({
   baseURL,
-  // timeout: 32000,
   headers: {
     "Content-Type": "application/json",
   },

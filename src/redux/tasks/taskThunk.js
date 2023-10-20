@@ -16,7 +16,7 @@ export const createTask = createAsyncThunk(
         task: data.task,
       };
     } catch (error) {
-      HandleTokenExpire(dispatch, error?.response);
+      HandleTokenExpire(dispatch, error);
       return rejectWithValue(error?.response || error?.message);
     }
   }
@@ -32,7 +32,7 @@ export const getTaskList = createAsyncThunk(
         task: data.task,
       };
     } catch (error) {
-      HandleTokenExpire(dispatch, error?.response);
+      HandleTokenExpire(dispatch, error);
       return rejectWithValue(error?.response || error?.message);
     }
   }

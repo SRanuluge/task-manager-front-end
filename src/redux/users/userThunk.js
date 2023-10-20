@@ -55,7 +55,7 @@ export const userSignOut = createAsyncThunk(
         token: null,
       };
     } catch (error) {
-      HandleTokenExpire(dispatch, error?.response);
+      HandleTokenExpire(dispatch, error);
       return rejectWithValue(error?.response || error?.message);
     }
   }
@@ -73,7 +73,7 @@ export const userSignOutAll = createAsyncThunk(
         token: null,
       };
     } catch (error) {
-      HandleTokenExpire(dispatch, error?.response);
+      HandleTokenExpire(dispatch, error);
       return rejectWithValue(error?.response || error?.message);
     }
   }

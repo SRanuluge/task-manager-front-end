@@ -2,12 +2,13 @@ import { Toast } from "./Toast";
 import { clearCredential } from "@/redux/users/userSlice";
 
 export default function HandleTokenExpire(dispatch, data) {
-  const statusCode = data?.status;
-  const message = data?.data?.message;
+  const statusCode = data?.response?.status || null;
+  const message = data?.response?.data?.message || data?.message;
+
   if (statusCode === 401) {
     dispatch(clearCredential());
     Toast(message, "error");
   } else {
-    statusCode && Toast(message, "error");
+    message && Toast(message, "error");
   }
 }
