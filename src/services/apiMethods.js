@@ -55,3 +55,10 @@ export const getTaskListAPI = (queryParam, token) => {
     { params: { sortBy: queryParam } }
   );
 };
+export const deleteTaskAPI = (id, token) => {
+  return apiBuilder.API.delete(`/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

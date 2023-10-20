@@ -23,7 +23,7 @@ export function FeatureCard({
             variant="outlined"
             size="lg"
             color="green"
-            className="pointer-events-none mb-6 rounded-full"
+            className="mb-6 cursor-pointer rounded-full"
             onClick={() => handleButtonClick(id, "edit")}
           >
             {editIcon}
@@ -32,7 +32,7 @@ export function FeatureCard({
             variant="outlined"
             size="lg"
             color="green"
-            className="pointer-events-none mb-6 rounded-full"
+            className="mb-6 cursor-pointer rounded-full"
             onClick={() => handleButtonClick(id, "delete")}
           >
             {deleteIcon}

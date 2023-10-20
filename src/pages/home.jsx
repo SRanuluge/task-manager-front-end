@@ -3,7 +3,7 @@ import { Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { createTask, getTaskList } from "@/redux/tasks/taskThunk";
+import { createTask, getTaskList, deleteTask } from "@/redux/tasks/taskThunk";
 import { useEffect } from "react";
 import React from "react";
 
@@ -20,9 +20,13 @@ export function Home() {
     dispatch(createTask({ description: task, completed: false }));
   };
 
-  const handleButtonClick = (props) => {
-    // dispatch(createTask({ description: task, completed: false }));
-    console.log(props);
+  const handleButtonClick = (id, flag) => {
+    if (flag === "edit") {
+      return console.log(flag, id);
+    }
+    if (flag === "delete") {
+      return dispatch(deleteTask(id));
+    }
   };
 
   useEffect(() => {
