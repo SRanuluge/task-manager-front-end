@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Button, Input } from "@material-tailwind/react";
 import { Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
@@ -6,6 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { createTask, getTaskList } from "@/redux/tasks/taskThunk";
 import { useEffect } from "react";
+import React from "react";
+
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 const params = ["createdAt", "desc"];
 
@@ -16,6 +18,11 @@ export function Home() {
 
   const handleCreateTask = () => {
     dispatch(createTask({ description: task, completed: false }));
+  };
+
+  const handleButtonClick = (props) => {
+    // dispatch(createTask({ description: task, completed: false }));
+    console.log(props);
   };
 
   useEffect(() => {
@@ -66,17 +73,24 @@ export function Home() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {tasks &&
-              tasks.map(({ description, completed, createdAt, updatedAt }) => (
-                <FeatureCard
-                  key={createdAt}
-                  color={"red"}
-                  title={description}
-                  // icon={React.createElement(icon, {
-                  //   className: "w-5 h-5 text-white",
-                  // })}
-                  description={description}
-                />
-              ))}
+              tasks.map(
+                ({ _id, description, completed, createdAt, updatedAt }) => (
+                  <FeatureCard
+                    key={createdAt}
+                    title={description}
+                    status={completed}
+                    editIcon={React.createElement(PencilIcon, {
+                      className: "w-8 h-8 ",
+                    })}
+                    deleteIcon={React.createElement(TrashIcon, {
+                      className: "w-8 h-8 ",
+                    })}
+                    description={description}
+                    handleButtonClick={handleButtonClick}
+                    id={_id}
+                  />
+                )
+              )}
           </div>
         </div>
       </section>
