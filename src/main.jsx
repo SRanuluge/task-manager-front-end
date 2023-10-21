@@ -5,7 +5,6 @@ import {
   RouterProvider,
   Route,
   createBrowserRouter,
-  createHashRouter,
 } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
 import "../public/css/tailwind.css";
@@ -19,7 +18,7 @@ import { persist, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 
-const router = createHashRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<App />}>
       <Route
