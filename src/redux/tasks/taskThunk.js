@@ -3,12 +3,13 @@ import {
   createTaskAPI,
   getTaskListAPI,
   deleteTaskAPI,
+  updateTaskAPI,
 } from "@/services/apiMethods";
 import { Toast } from "@/widgets/Toast";
 import HandleTokenExpire from "@/widgets/HandleTokenExpire";
 const params = ["createdAt", "desc"];
 export const createTask = createAsyncThunk(
-  "users/create-task",
+  "task/create-task",
   async (req, { dispatch, rejectWithValue, getState }) => {
     try {
       const { user } = getState();
@@ -27,7 +28,7 @@ export const createTask = createAsyncThunk(
 );
 
 export const getTaskList = createAsyncThunk(
-  "users/get-tasks",
+  "task/get-tasks",
   async (params, { dispatch, rejectWithValue, getState }) => {
     try {
       const { user } = getState();
@@ -43,11 +44,33 @@ export const getTaskList = createAsyncThunk(
 );
 
 export const deleteTask = createAsyncThunk(
-  "users/delete-tasks",
+  "task/delete-tasks",
   async (id, { dispatch, rejectWithValue, getState }) => {
     try {
       const { user } = getState();
       const task = await deleteTaskAPI(id, user.token);
+      const { data } = await dispatch(getTaskList(params, user.token));
+      Toast(task.data.message, "success");
+      return {
+        task: data.task,
+      };
+    } catch (error) {
+      HandleTokenExpire(dispatch, error);
+      return rejectWithValue(error?.response || error?.message);
+    }
+  }
+);
+
+export const updateTask = createAsyncThunk(
+  "task/update-tasks",
+  async ({ taskId, updatedData }, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const { user } = getState();
+      const task = await updateTaskAPI({
+        taskId,
+        updatedData,
+        token: user.token,
+      });
       const { data } = await dispatch(getTaskList(params, user.token));
       Toast(task.data.message, "success");
       return {

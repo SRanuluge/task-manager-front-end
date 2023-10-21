@@ -3,11 +3,18 @@ import { Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { createTask, getTaskList, deleteTask } from "@/redux/tasks/taskThunk";
+import {
+  createTask,
+  getTaskList,
+  deleteTask,
+  updateTask,
+} from "@/redux/tasks/taskThunk";
 import { useEffect } from "react";
 import React from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { CustomDialog } from "@/widgets/Dialog";
+import { TaskEdit } from "@/widgets/form/taskEdit";
 
 const params = ["createdAt", "desc"];
 
@@ -15,18 +22,35 @@ export function Home() {
   const { tasks } = useSelector((state) => state.task);
   const dispatch = useDispatch();
   const [task, setTask] = useState("");
+  const [updatedTask, setUpdatedTask] = useState("");
+  const [open, setOpen] = useState(false);
+  const [taskId, setTaskId] = useState("");
+  const [status, setStatus] = useState(false);
 
   const handleCreateTask = () => {
     dispatch(createTask({ description: task, completed: false }));
   };
 
   const handleButtonClick = (id, flag) => {
+    setTaskId(id);
     if (flag === "edit") {
+      setOpen(true);
+      setUpdatedTask(tasks.find((task) => task._id === id).description);
+      setStatus(tasks.find((task) => task._id === id).completed);
       return console.log(flag, id);
     }
     if (flag === "delete") {
       return dispatch(deleteTask(id));
     }
+  };
+  const handleConfirm = () => {
+    dispatch(
+      updateTask({
+        taskId,
+        updatedData: { description: updatedTask, completed: status },
+      })
+    );
+    return setOpen(false);
   };
 
   useEffect(() => {
@@ -75,7 +99,7 @@ export function Home() {
       </div>
       <section className="-mt-32 bg-gray-50 px-4 pb-20 pt-4">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
             {tasks &&
               tasks.map(
                 ({ _id, description, completed, createdAt, updatedAt }) => (
@@ -84,10 +108,10 @@ export function Home() {
                     title={description}
                     status={completed}
                     editIcon={React.createElement(PencilIcon, {
-                      className: "w-8 h-8 ",
+                      className: "w-4 h-4 ",
                     })}
                     deleteIcon={React.createElement(TrashIcon, {
-                      className: "w-8 h-8 ",
+                      className: "w-4 h-4 ",
                     })}
                     description={description}
                     handleButtonClick={handleButtonClick}
@@ -98,6 +122,19 @@ export function Home() {
           </div>
         </div>
       </section>
+      <CustomDialog
+        title={"Update Task"}
+        open={open}
+        handleOpen={() => setOpen(!open)}
+        handleConfirm={handleConfirm}
+      >
+        <TaskEdit
+          defaultName={updatedTask}
+          defaultStatus={status}
+          setName={(e) => setUpdatedTask(e)}
+          setStatus={(e) => setStatus(e)}
+        />
+      </CustomDialog>
       <div className="bg-blue-gray-50/50">
         <Footer />
       </div>

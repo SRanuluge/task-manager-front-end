@@ -62,3 +62,10 @@ export const deleteTaskAPI = (id, token) => {
     },
   });
 };
+export const updateTaskAPI = ({ taskId, updatedData, token }) => {
+  return apiBuilder.API.patch(`/tasks/${taskId}`, updatedData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTask, getTaskList, deleteTask } from "./taskThunk";
+import { createTask, getTaskList, deleteTask, updateTask } from "./taskThunk";
 
 const initialState = {
   tasks: null,
@@ -59,6 +59,21 @@ export const taskSlice = createSlice({
       state.taskError = false;
     });
     builder.addCase(deleteTask.rejected, (state) => {
+      state.taskLoading = false;
+      state.taskError = true;
+    });
+
+    // task update
+    builder.addCase(updateTask.pending, (state) => {
+      state.taskLoading = true;
+      state.taskError = false;
+    });
+    builder.addCase(updateTask.fulfilled, (state, { payload }) => {
+      state.tasks = payload.task;
+      state.taskLoading = false;
+      state.taskError = false;
+    });
+    builder.addCase(updateTask.rejected, (state) => {
       state.taskLoading = false;
       state.taskError = true;
     });
