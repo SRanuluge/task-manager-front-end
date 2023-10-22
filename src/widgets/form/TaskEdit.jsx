@@ -1,6 +1,11 @@
 import { Checkbox, Input, Typography } from "@material-tailwind/react";
 
-const TaskEdit = ({ defaultName, defaultStatus, setName, setStatus }) => {
+export const TaskEdit = ({
+  defaultName,
+  defaultStatus,
+  setName,
+  setStatus,
+}) => {
   return (
     <div className="mx-auto mt-12 max-w-3xl text-center">
       <div className="mb-8 flex gap-8">
@@ -41,4 +46,7 @@ const TaskEdit = ({ defaultName, defaultStatus, setName, setStatus }) => {
     </div>
   );
 };
+
+TaskEdit.displayName = "/src/widgets/form/TaskEdit.jsx";
+
 export default TaskEdit;
