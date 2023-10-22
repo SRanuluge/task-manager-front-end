@@ -19,7 +19,7 @@ import { persist, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 
-const router = createHashRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<App />}>
       <Route
@@ -38,8 +38,8 @@ const router = createHashRouter(
       </Route>
       <Route path={"*"} element={<NotFoundPage />} />
     </Route>
-  )
-  // { basename: import.meta.env.DEV ? "/" : "/task-manager-front-end/" }
+  ),
+  { basename: import.meta.env.DEV ? "/" : "/task-manager-front-end/" }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
