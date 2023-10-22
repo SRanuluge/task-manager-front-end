@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
         env.REACT_PUBLIC_API_BASE_URL
       ),
     },
-    base: "/",
+    base: "/task-manager-front-end/",
   };
 });
 
