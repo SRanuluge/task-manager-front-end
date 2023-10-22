@@ -14,7 +14,7 @@ import React from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CustomDialog } from "@/widgets/Dialog";
-import { TaskEdit } from "@/widgets/form/taskEdit";
+import TaskEdit from "@/widgets/form/taskEdit";
 
 const params = ["createdAt", "desc"];
 
