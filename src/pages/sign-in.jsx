@@ -55,7 +55,7 @@ export function SignIn() {
   return (
     <>
       <img
-        src="/background.jpg"
+        src="background.jpg"
         className="absolute inset-0 z-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />

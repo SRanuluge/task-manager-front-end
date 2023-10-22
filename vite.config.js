@@ -8,16 +8,11 @@ export default defineConfig(({ mode, command }) => {
     resolve: {
       alias: [{ find: "@", replacement: "/src" }],
     },
-    define: {
-      "process.env.REACT_PUBLIC_API_BASE_URL": JSON.stringify(
-        env.REACT_PUBLIC_API_BASE_URL
-      ),
-    },
-    base: "/",
+    base: "/task-manager-front-end/",
   };
-  if (command !== "serve") {
-    config.base = "/task-manager-front-end/";
-  }
+  // if (command !== "serve") {
+  //   config.base = "/task-manager-front-end/";
+  // }
 
   return config;
 });
