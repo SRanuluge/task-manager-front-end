@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path={"*"} element={<NotFoundPage />} />
     </Route>
-  )
+  ),
   { basename: import.meta.env.DEV ? "/" : "/task-manager-front-end/" }
 );
 
