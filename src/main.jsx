@@ -24,26 +24,17 @@ const router = createBrowserRouter(
     <Route element={<App />}>
       <Route
         errorElement={<ErrorPage />}
-        path={"task-manager-front-end/sign-in"}
+        path={"/sign-in"}
         element={<SignIn />}
       />
       <Route
         errorElement={<ErrorPage />}
-        path={"task-manager-front-end/sign-up"}
+        path={"sign-up"}
         element={<SignUp />}
       />
-      <Route
-        path={"task-manager-front-end/"}
-        element={<PrivateRoute />}
-        errorElement={<ErrorPage />}
-      >
-        <Route
-          exact
-          index={true}
-          path={"task-manager-front-end/"}
-          element={<Home />}
-        />
-        <Route path={"task-manager-front-end/profile"} element={<Profile />} />
+      <Route path={"/"} element={<PrivateRoute />} errorElement={<ErrorPage />}>
+        <Route exact index={true} path={"/"} element={<Home />} />
+        <Route path={"/profile"} element={<Profile />} />
       </Route>
       <Route path={"*"} element={<NotFoundPage />} />
     </Route>
