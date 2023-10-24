@@ -8,7 +8,7 @@ export default defineConfig(({ mode, command }) => {
     resolve: {
       alias: [{ find: "@", replacement: "/src" }],
     },
-    base: "/task-manager-front-end",
+    base: "/task-manager-front-end/",
   };
   // if (command !== "serve") {
   //   config.base = "/task-manager-front-end/";

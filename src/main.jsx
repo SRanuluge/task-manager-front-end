@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path={"*"} element={<NotFoundPage />} />
     </Route>
   ),
-  { basename: import.meta.env.DEV ? "/" : "/task-manager-front-end" }
+  { basename: "/task-manager-front-end/" }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
