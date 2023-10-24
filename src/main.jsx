@@ -29,7 +29,7 @@ const router = createBrowserRouter(
       />
       <Route
         errorElement={<ErrorPage />}
-        path={"sign-up"}
+        path={"/sign-up"}
         element={<SignUp />}
       />
       <Route path={"/"} element={<PrivateRoute />} errorElement={<ErrorPage />}>
@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path={"*"} element={<NotFoundPage />} />
     </Route>
   ),
-  { basename: "/task-manager-front-end/" }
+  { basename: "/task-manager-front-end" }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
