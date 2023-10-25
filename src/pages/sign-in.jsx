@@ -15,6 +15,7 @@ import { userSignIn } from "@/redux/users/userThunk";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Toast } from "@/widgets/Toast";
+import CustomSpinner from "@/widgets/Spinner";
 
 export function SignIn() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export function SignIn() {
 
   return (
     <>
+      {user?.userLoading ? <CustomSpinner /> : null}
       <img
         src="background.jpg"
         className="absolute inset-0 z-0 h-full w-full object-cover"

@@ -34,7 +34,7 @@ export function SignUp() {
 
   useEffect(() => {
     if (user?.user) {
-      navigate("/sign-in");
+      navigate("/");
     }
   }, [user?.user]);
   return (

@@ -1,4 +1,4 @@
-import { Typography, Button, Input } from "@material-tailwind/react";
+import { Typography, Button, Input, Spinner } from "@material-tailwind/react";
 import { Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,11 +15,13 @@ import React from "react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CustomDialog } from "@/widgets/Dialog";
 import { TaskEdit } from "@/widgets/form";
+import CustomSpinner from "@/widgets/Spinner";
+// import CustomSpinner from "@/widgets/Spinner";
 
 const params = ["createdAt", "desc"];
 
 export function Home() {
-  const { tasks } = useSelector((state) => state.task);
+  const { tasks, taskLoading } = useSelector((state) => state.task);
   const dispatch = useDispatch();
   const [task, setTask] = useState("");
   const [updatedTask, setUpdatedTask] = useState("");
@@ -28,6 +30,7 @@ export function Home() {
   const [status, setStatus] = useState(false);
 
   const handleCreateTask = () => {
+    setTask("");
     dispatch(createTask({ description: task, completed: false }));
   };
 
@@ -59,6 +62,7 @@ export function Home() {
 
   return (
     <>
+      {taskLoading ? <CustomSpinner /> : null}
       <div className="relative flex h-screen content-center items-center justify-center pb-32 pt-16">
         <div className="absolute top-0 h-full w-full bg-[url('/background.jpg')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
@@ -80,6 +84,7 @@ export function Home() {
                     size="lg"
                     label="Task Name"
                     name="task"
+                    value={task}
                     onChange={(e) => setTask(e.target.value)}
                   />
                 </div>
@@ -88,6 +93,7 @@ export function Home() {
                   variant="gradient"
                   size="lg"
                   className="mt-8"
+                  disabled={taskLoading}
                   onClick={handleCreateTask}
                 >
                   Add Task
@@ -97,6 +103,7 @@ export function Home() {
           </div>
         </div>
       </div>
+
       <section className="-mt-32 bg-gray-50 px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">

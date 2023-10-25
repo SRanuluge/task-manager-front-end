@@ -14,11 +14,11 @@ export const createTask = createAsyncThunk(
     try {
       const { user } = getState();
 
-      await createTaskAPI(req, user.token);
-      const { data } = await dispatch(getTaskList(params, user.token));
-      Toast(data.message, "success");
+      const response = await createTaskAPI(req, user.token);
+      await dispatch(getTaskList(params, user.token));
+      Toast(response.data.message, "success");
       return {
-        task: data.task,
+        task: null,
       };
     } catch (error) {
       HandleTokenExpire(dispatch, error);
@@ -49,10 +49,10 @@ export const deleteTask = createAsyncThunk(
     try {
       const { user } = getState();
       const task = await deleteTaskAPI(id, user.token);
-      const { data } = await dispatch(getTaskList(params, user.token));
+      await dispatch(getTaskList(params, user.token));
       Toast(task.data.message, "success");
       return {
-        task: data.task,
+        task: null,
       };
     } catch (error) {
       HandleTokenExpire(dispatch, error);
@@ -71,10 +71,10 @@ export const updateTask = createAsyncThunk(
         updatedData,
         token: user.token,
       });
-      const { data } = await dispatch(getTaskList(params, user.token));
+      await dispatch(getTaskList(params, user.token));
       Toast(task.data.message, "success");
       return {
-        task: data.task,
+        task: null,
       };
     } catch (error) {
       HandleTokenExpire(dispatch, error);

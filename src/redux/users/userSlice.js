@@ -48,8 +48,8 @@ export const userSlice = createSlice({
       state.userError = false;
     });
     builder.addCase(userSignUp.fulfilled, (state, { payload }) => {
-      // state.user = payload.user;
-      // state.token = payload.token;
+      state.user = payload.user;
+      state.token = payload.token;
       state.userLoading = false;
       state.userError = false;
     });

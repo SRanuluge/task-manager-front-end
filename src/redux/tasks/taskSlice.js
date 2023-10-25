@@ -24,7 +24,7 @@ export const taskSlice = createSlice({
       state.taskError = false;
     });
     builder.addCase(createTask.fulfilled, (state, { payload }) => {
-      state.tasks = payload.task;
+      // state.tasks = payload.task;
       state.taskLoading = false;
       state.taskError = false;
     });
@@ -54,7 +54,7 @@ export const taskSlice = createSlice({
       state.taskError = false;
     });
     builder.addCase(deleteTask.fulfilled, (state, { payload }) => {
-      state.tasks = payload.task;
+      // state.tasks = payload.task;
       state.taskLoading = false;
       state.taskError = false;
     });
@@ -69,7 +69,7 @@ export const taskSlice = createSlice({
       state.taskError = false;
     });
     builder.addCase(updateTask.fulfilled, (state, { payload }) => {
-      state.tasks = payload.task;
+      // state.tasks = payload.task;
       state.taskLoading = false;
       state.taskError = false;
     });
