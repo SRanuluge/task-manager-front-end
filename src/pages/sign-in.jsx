@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -14,7 +15,6 @@ import { userSignIn } from "@/redux/users/userThunk";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Toast } from "@/widgets/Toast";
-import { useEffect } from "react";
 
 export function SignIn() {
   const dispatch = useDispatch();

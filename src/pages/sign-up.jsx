@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userSignUp } from "@/redux/users/userThunk";
 
 export function SignUp() {
