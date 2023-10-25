@@ -13,6 +13,7 @@ import { SimpleFooter } from "@/widgets/layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { userSignUp } from "@/redux/users/userThunk";
+import CustomSpinner from "@/widgets/Spinner";
 
 export function SignUp() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export function SignUp() {
   }, [user?.user]);
   return (
     <>
+      {user?.userLoading ? <CustomSpinner /> : null}
       <img
         src="background.jpg"
         className="absolute inset-0 z-0 h-full w-full object-cover"
