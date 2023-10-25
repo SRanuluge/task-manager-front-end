@@ -29,22 +29,7 @@ export function SignIn() {
         email,
         password,
       })
-    ).then((res) => {
-      // const statusCode =res?.
-      // if (res.payload?.user) {
-      //   navigate("/");
-      // } else {
-      //   Toast(res.payload, "error");
-      // }
-      // const statusCode = res?.payload?.status;
-      // const message = res?.payload?.data.message;
-      // if (statusCode === 401) {
-      //   dispatch(clearCredential());
-      //   return Toast(message, "error");
-      // } else {
-      //   statusCode && Toast(message, "error");
-      // }
-    });
+    );
   };
   useEffect(() => {
     if (user?.user) {
